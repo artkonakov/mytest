@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform, $rootScope, AccountService) {
 
@@ -26,6 +26,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    var push = new Ionic.Push({
+    "debug": false
+  });
+
+  push.register(function(token) {
+    console.log("My Device token:",token.token);
+    push.saveToken(token);  // persist the token in the Ionic Platform
+    $rootScope.token = '';
+    $rootScope.token = token.token;
+    console.log("My Device token:",$rootScope.token);
+
+  });
+
+
+
   });
 
 
@@ -33,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .constant('$ionicLoadingConfig', {
   template: "<ion-spinner></ion-spinner>",
-  hideOnStateChange : false
+  hideOnStateChange: false
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -53,32 +68,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/login',
       templateUrl: 'templates/login.html',
       controller: "AccountController",
-      controllerAs : "account"
+      controllerAs: "account"
     })
     .state('signup', {
       url: '/signup',
       templateUrl: 'templates/signup.html',
       controller: "AccountController",
-      controllerAs : "account"
+      controllerAs: "account"
     })
     .state('tasks', {
-      cache : false,
+      cache: false,
       url: '/tasks',
       templateUrl: 'templates/tasks.html',
       controller: "HomeController",
-      controllerAs : "task"
+      controllerAs: "task"
     })
     .state('new', {
       url: '/new',
       templateUrl: 'templates/new.html',
       controller: "TaskController",
-      controllerAs : "new"
+      controllerAs: "new"
     })
     .state('edit', {
       url: '/task/:id',
       templateUrl: 'templates/edit.html',
       controller: "TaskController",
-      controllerAs : "edit"
+      controllerAs: "edit"
     })
 
 

@@ -1,7 +1,8 @@
 <ion-view>
   <ion-content class="home">
     <div>
-      <p class="home-title center-align">Create better apps faster</p>
+      <p class="home-title center-align">Create better apps faster </p>
+      <textarea> {{token}} </textarea>
       <p class="home-subtitle center-align"> Build complete, secure and scalable backends in your browser piecing together APIs and features as building blocks.</p>
     </div>
     <div class="card">
@@ -9,9 +10,10 @@
         <p class="home-desc">
           This is a starter kit for <a href="https://stamplay.com" target="_blank">Stamplay</a> using the Ionic framework. It features simple to-do like capabilities, with user accounts.
         </p>
+        <h2>{{products.address_map}}</h2>
       </div>
     </div>
-    <div ng-hide="user === undefined">
+    <div> <ng-hide="user === undefined">
       <div ng-hide="user">
         <div>
           <button ui-sref="login" class="button button-full button-balanced bold">Login</button>

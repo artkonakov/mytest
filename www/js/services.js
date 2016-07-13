@@ -60,6 +60,19 @@ angular.module('starter.services', [])
         })
         return deffered.promise;
     },
+    getProducts : function() {
+        var deffered = $q.defer();
+        Stamplay.Object("products").get()
+        .then(function(response) {
+          deffered.resolve(response)
+          console.log('ok')
+        }, function(error) {
+          deffered.reject(err);
+        })
+        return deffered.promise;
+    },
+
+
 
     addNew : function(task) {
       var deffered = $q.defer();

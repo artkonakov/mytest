@@ -64,6 +64,11 @@ angular.module('starter.controllers', [])
     }).indexOf(id);
   }
 
+  TaskService.getProducts().then(function(response){
+    $rootScope.products = [];
+     $rootScope.products = response.data[0];
+     console.log($rootScope.products);
+  });
   // Display loading indicator
   $ionicLoading.show();
 
@@ -137,6 +142,9 @@ angular.module('starter.controllers', [])
 
 .controller('TaskController', ["TaskService", "$ionicLoading", "$rootScope", "$state", "$stateParams", function(TaskService,  $ionicLoading, $rootScope, $state, $stateParams) {
   var vm = this;
+
+
+
 
   if($stateParams.id) {
     $ionicLoading.show();

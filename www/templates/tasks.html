@@ -2,22 +2,26 @@
   <ion-nav-bar align-title="center" class="bar-light">
     <ion-nav-back-button></ion-nav-back-button>
     <ion-nav-title>
-      TASKS {{ '(' + task.tasks.length + ')' }}
+      TASKS {{ '(' + task.tasks.length + ')' }}   {{products.description}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
       <a class="button button-icon icon ion-plus-circled" ui-sref="new"></a>
+
     </ion-nav-buttons>
   </ion-nav-bar>
   <ion-content ng-init="task.fetch()">
     <h1 class="account-title center-align">
       <div ng-if="user">
-        Your Tasks
+        Your Tasks  {{$rootScope.token}}
       </div>
       <div ng-if="!user && task.tasks !== undefined">
-       Community Tasks
+       Community Tasks  {{token}}
       </div>
     </h1>
     <ion-list can-swipe="true">
+    <div class="card">
+        <h2>Тест {{products.description}} </h2>
+    </div>
       <ion-item ng-repeat="item in task.tasks" ng-class="{ 'active' : item.id === task.active }">
         <div class="row">
           <div class="col col-20" style="display: flex;justify-content: flex-end;align-items: center;">
