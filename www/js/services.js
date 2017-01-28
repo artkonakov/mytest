@@ -62,7 +62,7 @@ angular.module('starter.services', [])
     },
     getProducts : function() {
         var deffered = $q.defer();
-        Stamplay.Object("products").get()
+        Stamplay.Object("items").get()
         .then(function(response) {
           deffered.resolve(response)
           console.log('ok')
@@ -70,6 +70,17 @@ angular.module('starter.services', [])
           deffered.reject(err);
         })
         return deffered.promise;
+    },
+    getProductById : function(id) {
+      var deffered = $q.defer();
+      Stamplay.Object("items").get({ _id : id })
+      .then(function(response) {
+        deffered.resolve(response)
+        console.log('ok');
+      }, function(error) {
+        deffered.reject(err);
+      })
+      return deffered.promise;
     },
 
 

@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.list {
+  padding-top: 0px;
+  margin-bottom: 0px;
+}
+.nowrap {
+   white-space: nowrap!important;
+}
+.wrap {
+  overflow: initial!important;
+  white-space: initial!important;
+}

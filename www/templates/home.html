@@ -1,35 +1,48 @@
 <ion-view>
   <ion-content class="home">
-    <div>
-      <p class="home-title center-align">Create better apps faster </p>
-      <textarea> {{token}} </textarea>
-      <p class="home-subtitle center-align"> Build complete, secure and scalable backends in your browser piecing together APIs and features as building blocks.</p>
-    </div>
-    <div class="card">
-      <div class="item item-body center-align">
-        <p class="home-desc">
-          This is a starter kit for <a href="https://stamplay.com" target="_blank">Stamplay</a> using the Ionic framework. It features simple to-do like capabilities, with user accounts.
-        </p>
-        <h2>{{products.address_map}}</h2>
+    <ion-android-list>
+      <div class="item item-divider">
+        Горячие предложения
       </div>
-    </div>
-    <div> <ng-hide="user === undefined">
-      <div ng-hide="user">
-        <div>
-          <button ui-sref="login" class="button button-full button-balanced bold">Login</button>
-          <button ui-sref="signup" class="button button-full button-positive bold">Signup</button>
-        </div>
-        <div class="center-align">
-          <b class="or">or</b>
-        </div>
-        <div>
-          <button ui-sref="tasks" class="button button-full button-dark bold">Continue as Guest</button>
-        </div>
+      <div ng-repeat="item in items" class="list">
+        <a class="item item-thumbnail-left" href="#/item/{{item._id}}">
+          <img ng-src={{item.offer_image_url}}>
+          <h2 class="wrap">{{item.offer_header}}</h2>
+          <p class="nowrap">{{item.offer_description}}</p>
+          <p>{{item.shop_name}}</p>
+          <button class="button button-stable button-small">Сохранить купон</button>
+        </a>
       </div>
-      <div ng-show="user" ng-controller="AccountController as account">
-        <button ui-sref="tasks" class="button button-full button-dark bold">My Tasks</button>
-        <button ng-click="account.logout()" class="button button-full button-stable bold">Logout</button>
+      <div class="item item-divider">
+        Популярные предложения
       </div>
-    </div>
+      <div ng-repeat="product in products" class="list">
+        <a class="item item-thumbnail-left" href="#">
+          <img ng-src={{product.main_img_href}}>
+          <h2 class="wrap">{{product.header}}</h2>
+          <p class="nowrap">{{product.full_description}}</p>
+          <p>Парикмахерская "Елена"</p>
+          <button class="button button-stable button-small">Сохранить купон</button>
+        </a>
+      </div>
+      <div class="item item-divider">
+        Скоро истекают
+      </div>
+      <div ng-repeat="product in products" class="list">
+        <a class="item item-thumbnail-left" href="#">
+          <img ng-src={{product.main_img_href}}>
+
+          <h2 class="wrap">{{product.header}}</h2>
+          <p class="nowrap">{{product.full_description}}</p>
+          <p>Парикмахерская "Елена"</p>
+          <button class="button button-stable button-small">Сохранить купон</button>
+        </a>
+      </div>
+    </ion-android-list>
+    <!-- <hscroller>
+      <hcard ng-repeat="product in products" index="{{$index}}" desc="{{product.about_header}}" image="http://mirgif.com/6/45.gif"></hcard>
+      <hcard ng-repeat="product in products" index="{{$index}}" desc="{{product.about_header}}" image="http://mirgif.com/6/45.gif"></hcard>
+    </hscroller> -->
   </ion-content>
+
 </ion-view>

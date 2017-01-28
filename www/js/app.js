@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'starter.services', 'ionic.contrib.ui.hscrollcards'])
 
 .run(function($ionicPlatform, $rootScope, AccountService) {
 
@@ -26,18 +26,21 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    var push = new Ionic.Push({
-    "debug": false
-  });
+    document.addEventListener('deviceready', function () {
+      // Enable to debug issues.
+      // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
-  push.register(function(token) {
-    console.log("My Device token:",token.token);
-    push.saveToken(token);  // persist the token in the Ionic Platform
-    $rootScope.token = '';
-    $rootScope.token = token.token;
-    console.log("My Device token:",$rootScope.token);
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+      };
 
-  });
+      window.plugins.OneSignal.init("e38a1b51-8ab8-46c8-aa56-2d3180beaa44",
+                                     {googleProjectNumber: "468943060955"},
+                                     notificationOpenedCallback);
+
+      // Show an alert box if a notification comes in when the user is in your app.
+      window.plugins.OneSignal.enableInAppAlertNotification(false);
+    }, false);
 
 
 
@@ -62,7 +65,9 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
   // setup an abstract state for the tabs directive
     .state('home', {
       url: '/',
-      templateUrl: 'templates/home.html'
+      templateUrl: 'templates/home.html',
+      controller: "MainController",
+      controllerAs: "home"
     })
     .state('login', {
       url: '/login',
@@ -89,12 +94,13 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
       controller: "TaskController",
       controllerAs: "new"
     })
-    .state('edit', {
-      url: '/task/:id',
-      templateUrl: 'templates/edit.html',
-      controller: "TaskController",
-      controllerAs: "edit"
+    .state('item', {
+      url: '/item/:id',
+      templateUrl: 'templates/item.html',
+      controller: "ItemController",
+      controllerAs: "item"
     })
+  
 
 
 
